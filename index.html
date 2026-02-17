@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <link rel="stylesheet" href="style.css" />
+        
+        <title>State Management</title>
+    </head>
+
+    <body class="m-auto flex items-center justify-center h-screen   ">
+
+    <div class="min-h-screen w-full relative items-center justify-center flex">
+        <div class="absolute inset-0 z-0" style="background-image: url('images/coolbackgrounds-topography-micron.svg'); "> 
+        </div>
+        
+        <div class="relative inset-0 items-center justify-center flex z-10 w-screen p-10">   
+            <form id="signupForm" class="w-screen h-[550px] bg-white flex flex-col items-center outline-none rounded-lg shadow-lg shadow-blue-500/50 border-blue-500 border-1 p-10">
+
+                <h1 class="text-2xl  font-sans font-bold w-full text-left">Personal Information</h1>
+
+                <div class="flex gap-7 w-full ">
+                    <div class="flex flex-col mt-3  flex-1">
+                        <label for="studentType">Student Type</label>
+                        <select name="StudentType" id="studentType" class="border-1 rounded  w-full py-1 px-4">
+                            <option value="" disabled selected hidden>-- Select student type --</option>
+                            <option value="NewStudent">New Student</option>
+                            <option value="Transferee">Transferee</option>
+                        </select>
+                        <span id="studentTypeError" class="text-red-600 text-sm italic"></span>
+                    </div>
+                    <div class="flex flex-col mt-3 flex-1">
+                        <label for="religion">Religion</label>
+                        <select name="Religion" id="religion" class="border-1 rounded  w-full py-1 px-4">
+                            <option value="" disabled selected hidden>-- Select religion --</option>
+                            <option value="RomanCatholic">Roman Catholic</option>
+                            <option value="Christianity">Christianity</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Hinduism">Hinduism</option>
+                            <option value="Buddhism">Buddhism</option>
+                            <option value="Judaism">Judaism</option>    
+                            <option value="Atheism">Atheism</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span id="religionError" class="text-red-600 text-sm italic"></span>
+                    </div>
+                    <div class="flex flex-col mt-3 flex-1">
+                        <label for="civilStat">Civil Status</label>
+                        <select name="CivilStatus" id="civilStat" class="border-1 rounded  w-full py-1 px-4">
+                            <option value="" disabled selected hidden>-- Civil Status --</option>
+                            <option value="Single">Single</option>
+                            <option value="Married">Married</option>
+                            <option value="Widowed">Widowed</option>
+                            <option value="Separated">Separated</option>
+                            <option value="Annulled">Annulled</option>    
+                            <option value="Divorced">Divorced</option>
+                        </select>
+                        <span id="civilStatError" class="text-red-600 text-sm italic"></span>
+                    </div>
+                </div>
+                
+                <div class="flex gap-7 w-full ">
+                    <div class="flex flex-col mt-3 flex-1">
+                        <label for="firstName">First Name</label>
+                        <input type="text" name="FirstName" id="firstName" class="border-1 rounded  w-full py-1 px-4">
+                        <span id="firstNameError" class="text-red-600 text-sm italic"></span>
+                    </div>
+                    <div class="flex flex-col mt-3 flex-1">
+                        <label for="middleName">Middlename</label>
+                        <input type="text" name="MiddleName" placeholder="Leave blank if none" id="middleName" class="border-1 rounded  w-full py-1 px-4">
+                        <span id="middleNameError" class="text-red-600 text-sm italic"></span>
+                    </div>
+                    <div class="flex flex-col mt-3 flex-1">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" name="LastName" id="lastName" class="border-1 rounded  w-full py-1 px-4">
+                        <span id="lastNameError" class="text-red-600 text-sm italic"></span>
+                    </div>
+                </div>
+                <div class="flex gap-7 w-full ">
+                    <div class="flex flex-col mt-3 flex-1">
+                        <label for="suffix">Suffix</label>
+                        <input type="text" name="Suffix" placeholder="Jr., Sr., I, II, etc. (Leave blank if none)" id="suffix" class="border-1 rounded  w-full py-1 px-4">
+                        <span id="suffixError" class="text-red-600 text-sm italic"></span>
+                    </div>
+                    <div class="flex flex-col mt-3 flex-1">
+                        <label for="contactNumber">Contact Number</label>
+                        <input type="text" name="ContactNumber" placeholder="e.g. 09635274532" id="contactNumber" class="border-1 rounded  w-full py-1 px-4">
+                        <span id="contactNumberError" class="text-red-600 text-sm italic"></span>
+                    </div>
+                    <div class="flex flex-col mt-3 flex-1">
+                        <label for="birthdate">Birthdate</label>
+                        <input type="date" name="Birthdate" placeholder="MM-DD-YYYY" id="birthdate" class="border-1 rounded  w-[270px] py-1 px-4">
+                        <span id="birthdateError" class="text-red-600 text-sm italic"></span>
+                    </div>
+                </div>
+                <div class="flex gap-7 w-full ">
+                    <div class="flex flex-col mt-3 flex-1">
+                        <label for="sex">Sex</label>
+                        <select name="Sex" id="sex" class="border-1 rounded  w-full py-1 px-4">
+                            <option value="" disabled selected hidden>-- Select sex --</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        <span id="sexError" class="text-red-600 text-sm italic"></span>
+                    </div>
+                    <div class="flex flex-col mt-3 flex-1">
+                        <label for="emailAddress">Email Address</label>
+                        <input type="text" name="EmailAddress" id="emailAddress" class="border-1 rounded  w-full py-1 px-4">
+                        <span id="emailAddressError" class="text-red-600 text-sm italic"></span>
+                    </div>
+                    <div class="flex flex-col mt-3 flex-1">
+                        <label for="nationality">Nationality</label>
+                        <input type="text" name="Nationality" id="nationality" class="border-1 rounded  w-full py-1 px-4">
+                        <span id="nationalityError" class="text-red-600 text-sm italic"></span>
+                    </div>
+                </div>
+                
+                <button type="submit" class="w-[150px] h-[40px] bg-blue-800 text-white rounded-lg px-5 mt-10 mb-1 hover:bg-gray-300 hover:text-black  duration-300 ease-in-out">Submit</button>
+                
+            </form>
+        </div>
+
+    </div>
+        
+    <script src="script.js"></script>
+    </body>
+</html>
