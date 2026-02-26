@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Form Validation</title>
+  </head>
+
+  <body class="m-auto flex items-center justify-center h-screen">
+    <div class="min-h-screen w-full relative items-center justify-center flex">
+      <div
+        class="absolute inset-0 z-0"
+        style="
+          background-image: url(&quot;images/coolbackgrounds-topography-micron.svg&quot;);
+        "
+      ></div>
+
+      <div class="relative inset-0 items-center justify-center flex z-10">
+        <form
+          id="signupForm"
+          class="w-[390px] h-[500px] bg-white flex flex-col items-center outline-none rounded-lg shadow-lg shadow-blue-500/50 border-blue-500 border-1"
+        >
+          <h1 class="text-2xl m-8 font-sans font-bold">Signup Here!</h1>
+
+          <div class="flex flex-col mt-3 w-[270px]">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              name="Username"
+              id="username"
+              class="border-1 rounded w-[270px] py-1 px-4"
+            />
+            <span id="usernameError" class="text-red-600 text-sm italic"></span>
+          </div>
+
+          <div class="flex flex-col mt-3 w-[270px]">
+            <label for="email">Email</label>
+            <input
+              type="text"
+              name="Email"
+              id="email"
+              class="border-1 rounded w-[270px] py-1 px-4"
+            />
+            <span id="emailError" class="text-red-600 text-sm italic"></span>
+          </div>
+
+          <div class="flex flex-col mt-3 w-[270px]">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              name="Password"
+              id="password"
+              class="border-1 rounded w-[270px] py-1 px-4"
+            />
+            <span id="passwordError" class="text-red-600 text-sm italic"></span>
+          </div>
+
+          <button
+            type="submit"
+            class="w-[200px] h-[35px] bg-blue-800 text-white rounded-lg px-5 mt-6 mb-1 hover:bg-gray-300 hover:text-black duration-300 ease-in-out"
+          >
+            Signup
+          </button>
+          <div class="flex flex-col gap-1">
+            <!-- <button
+              id="logout-btn"
+              type="button"
+              class="w-[200px] h-[35px] bg-blue-800 text-white rounded-lg px-5 mt-1 mb-1 hover:bg-gray-300 hover:text-black duration-300 ease-in-out cursor-pointer"
+            >
+              Back
+            </button> -->
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module">
+      import { signup } from "./auth.js";
+      const user = document.getElementById("username");
+      const email = document.getElementById("email");
+      const pass = document.getElementById("password");
+
+      const emailError = document.getElementById("emailError");
+      const usernameError = document.getElementById("usernameError");
+      const passwordError = document.getElementById("passwordError");
+
+      function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      let validemail = false;
+      let validuser = false;
+      let validpass = false;
+
+      email.addEventListener("blur", () => {
+        if (email.value.trim() === "") {
+          emailError.textContent = "Email is Required!";
+          validemail = false;
+        } else if (!isValidEmail(email.value)) {
+          emailError.textContent = "Invalid Email!";
+          validemail = false;
+        } else {
+          emailError.textContent = "";
+          validemail = true;
+        }
+      });
+
+      email.addEventListener("input", () => {
+        if (!isValidEmail(email.value)) {
+          emailError.textContent = "Invalid Email!";
+          validemail = false;
+        } else {
+          emailError.textContent = "";
+          validemail = true;
+        }
+      });
+
+      user.addEventListener("input", () => {
+        if (user.value.trim() === "") {
+          usernameError.textContent = "Username is Required!";
+          validuser = false;
+        } else if (user.value.length < 3) {
+          usernameError.textContent = "Username must be at least 3 characters";
+          validuser = false;
+        } else {
+          usernameError.textContent = "";
+          validuser = true;
+        }
+      });
+
+      pass.addEventListener("input", () => {
+        if (pass.value.length < 8) {
+          passwordError.textContent = "Password must be at least 8 characters";
+          validpass = false;
+        } else if (!/\d/.test(pass.value)) {
+          passwordError.textContent = "Password must contain a number";
+          validpass = false;
+        } else {
+          passwordError.textContent = "";
+          validpass = true;
+        }
+      });
+
+      document.getElementById("signupForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        if (validemail && validuser && validpass) {
+          const success = signup(user.value, email.value, pass.value);
+          if (success) {
+            window.location.href = "Home.html";
+          }
+        } else {
+          alert("Please fix the errors in the form before submitting.");
+        }
+      });
+    </script>
+  </body>
+</html>
