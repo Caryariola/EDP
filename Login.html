@@ -54,11 +54,11 @@
           </div>
           <div class="flex flex-col gap-1">
             <button
-              id="logout-btn"
+              id="signup-btn"
               type="button"
               class="w-[200px] h-[35px] bg-blue-800 text-white rounded-lg px-5 mt-1 mb-1 hover:bg-gray-300 hover:text-black duration-300 ease-in-out cursor-pointer"
             >
-              Back
+              Signup
             </button>
           </div>
         </form>
@@ -70,6 +70,7 @@
       const pass = document.getElementById("password");
       const emailError = document.getElementById("emailError");
       const passwordError = document.getElementById("passwordError");
+      const signupBtn = document.getElementById("signup-btn");
 
       function isValidEmail(email) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -77,6 +78,10 @@
 
       let validemail = false;
       let validpass = false;
+
+      signupBtn.addEventListener("click", () => {
+        window.location.href = "Signup.html";
+      });
 
       email.addEventListener("blur", () => {
         if (email.value.trim() === "") {
