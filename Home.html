@@ -44,25 +44,8 @@
       </div>
     </div>
 
-    <script type="module">
-      import { logout, getCurrentUser } from "./auth.js";
-
-      const currentUser = getCurrentUser();
-      const displayUsername = document.getElementById("displayUsername");
-      const displayEmail = document.getElementById("displayEmail");
-
-      if (!currentUser) {
-        alert("Access Denied. Please log in first.");
-        window.location.href = "Login.html";
-      } else {
-        displayUsername.textContent = currentUser.username;
-        displayEmail.textContent = currentUser.email;
-      }
-
-      document.getElementById("logout-btn").addEventListener("click", () => {
-        logout();
-        window.location.href = "Login.html";
-      });
+    <script type="module" src="./js/Home.js">
+      
     </script>
   </body>
 </html>
