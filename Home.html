@@ -20,18 +20,20 @@
         "
       ></div>
 
-      <div class="relative inset-0 items-center justify-center flex z-10">
+      <div class="relative inset-0 mb-auto justify-center flex z-10">
         <div
           id="home"
-          class="w-[350px] h-[250px] bg-white flex flex-col items-center rounded-lg shadow-lg shadow-blue-500/50 border-blue-500 border-1"
+          class="w-[650px] h-[100px] bg-white flex  items-center rounded-lg shadow-lg shadow-blue-500/50 border-blue-500 border-1"
         >
-          <h1 class="text-2xl mt-10 font-sans">
+          <div class="flex flex-col items-center gap-4 m-auto">
+            <h1 class="text-2xl m-auto font-sans">
             Welcome
             <span id="displayUsername" class="text-2xl font-sans"> </span>!
           </h1>
-          <p id="displayEmail" class="text-center mb-5 text-gray-600"></p>
+          <p id="displayEmail" class="text-center m-auto text-gray-600"></p> 
+          </div>
 
-          <div class="flex flex-col gap-2 mt-auto">
+          <div class="flex  gap-2 m-auto">
             <button
               id="logout-btn"
               type="button"
@@ -42,10 +44,13 @@
           </div>
         </div>
       </div>
+
+      
+      
+      
     </div>
 
     <script type="module" src="./js/Home.js">
-      
     </script>
   </body>
 </html>
