@@ -33,15 +33,15 @@ const panel = document.getElementById("cardcontainer");
 
 async function getTitle() {
   const categoryId = categoryFilter.value;
-  const minPrice = minPriceInput.value || 0; // Default to 0 if empty
+  const minPrice = minPriceInput.value || 1; // Default to 0 if empty
   const maxPrice = maxPriceInput.value || 9999; // Default to 9999 if empty
 
   // offset=0&limit=50 ensures we get plenty of data to meet the "not less than 25" rule
-  let url = `https://api.escuelajs.co/api/v1/products/?offset=0&limit=50`;
+  let url = `https://api.escuelajs.co/api/v1/products`;
 
-  if (categoryId) url += `&categoryId=${categoryId}`;
-  if (minPrice) url += `&price_min=${minPrice}`;
-  if (maxPrice) url += `&price_max=${maxPrice}`;
+  if (categoryId) url += `?categoryId=${categoryId}`;
+  if (minPrice) url += `${url.includes('?') ? '&' : '?'}price_min=${minPrice}`;
+  if (maxPrice) url += `${url.includes('?') ? '&' : '?'}price_max=${maxPrice}`;
 
   panel.innerHTML = `<p class="col-span-full text-center py-10">Searching for products...</p>`;
 
