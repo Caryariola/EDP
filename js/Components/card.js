@@ -31,7 +31,7 @@ export function ProductCard(product) {
                         $${product.price}
                     </span>
                     
-                    <button class="w-full bg-blue-600 text-white py-2.5 rounded-lg font-bold text-xs hover:bg-blue-800 active:scale-95 transition-all duration-200 cursor-pointer shadow-md shadow-blue-200">
+                    <button onclick="addToCart(${product.id}, '${product.title}', ${product.price}, '${imageUrl}')" class="w-full bg-blue-600 text-white py-2.5 rounded-lg font-bold text-xs hover:bg-blue-800 active:scale-95 transition-all duration-200 cursor-pointer shadow-md shadow-blue-200">
                         ADD TO CART
                     </button>
                 </div>

@@ -5,6 +5,53 @@ const currentUser = getCurrentUser();
 const displayUsername = document.getElementById("displayUsername");
 const displayEmail = document.getElementById("displayEmail");
 const logbutton = document.getElementById("logbutton");
+const cartbutton = document.getElementById("cart-btn");
+
+
+const cartKey = `cart_${currentUser.username}`;
+let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+
+// --- Updated Cart Badge Logic ---
+
+function updateBadge() {
+  const badge = document.getElementById("cart-count"); // Ensure this matches your HTML ID
+  
+  if (badge) {
+    // We only care about how many objects (unique IDs) are in the array
+    const uniqueItemsCount = cart.length; 
+    
+    badge.textContent = uniqueItemsCount;
+    
+    // Hide the badge if the cart is empty (0)
+    badge.style.display = uniqueItemsCount > 0 ? "block" : "none";
+  }
+}
+
+// Call it immediately so it shows the count on page load
+updateBadge();
+
+window.addToCart = (id, title, price, image) => {
+  // GUARD CLAUSE: Check login ONLY when someone clicks the button
+  if (!currentUser) {
+    alert("Please login to add items to your cart!");
+    window.location.href = "../auth/Login.html";
+    return; // This return is now safe because it's inside a function!
+  }
+
+  // If logged in, proceed
+  const existing = cart.find(item => item.id === id);
+
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    cart.push({ id, title, price, image, quantity: 1 });
+  }
+
+  localStorage.setItem("shopping_cart", JSON.stringify(cart));
+  updateBadge();
+  
+  alert(`${title} added to cart!`);
+};
 
 if (!currentUser) {
   displayUsername.textContent = "Guest";
@@ -30,6 +77,8 @@ const categoryFilter = document.getElementById("category-filter");
 const minPriceInput = document.getElementById("min-price"); // Matches HTML ID
 const maxPriceInput = document.getElementById("max-price"); // Matches HTML ID
 const panel = document.getElementById("cardcontainer");
+
+
 
 async function getTitle() {
   const categoryId = categoryFilter.value;
@@ -65,6 +114,9 @@ async function getTitle() {
 
 button.addEventListener("click", getTitle);
 categoryFilter.addEventListener("change", getTitle);
+cartbutton.addEventListener("click", () => {
+  window.location.href = "Cart.html";
+});
 
 // Load 25+ products automatically on start
 getTitle();
