@@ -6,10 +6,11 @@ const displayUsername = document.getElementById("displayUsername");
 const displayEmail = document.getElementById("displayEmail");
 const logbutton = document.getElementById("logbutton");
 const cartbutton = document.getElementById("cart-btn");
+const checkoutButton = document.getElementById("check-out");
 
 
-const cartKey = `cart_${currentUser.username}`;
-let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+const cartKey = currentUser ? `cart_${currentUser.username}` : null;
+let cart = cartKey ? (JSON.parse(localStorage.getItem(cartKey)) || []) : [];
 
 // --- Updated Cart Badge Logic ---
 
@@ -19,7 +20,6 @@ function updateBadge() {
   if (badge) {
     // We only care about how many objects (unique IDs) are in the array
     const uniqueItemsCount = cart.length; 
-    
     badge.textContent = uniqueItemsCount;
     
     // Hide the badge if the cart is empty (0)
@@ -47,7 +47,7 @@ window.addToCart = (id, title, price, image) => {
     cart.push({ id, title, price, image, quantity: 1 });
   }
 
-  localStorage.setItem("shopping_cart", JSON.stringify(cart));
+  localStorage.setItem(cartKey, JSON.stringify(cart));
   updateBadge();
   
   alert(`${title} added to cart!`);
@@ -115,7 +115,14 @@ async function getTitle() {
 button.addEventListener("click", getTitle);
 categoryFilter.addEventListener("change", getTitle);
 cartbutton.addEventListener("click", () => {
-  window.location.href = "Cart.html";
+
+  if (!currentUser) {
+    alert("Please login to view your cart!");
+    window.location.href = "../auth/Login.html";
+    return;
+  } else {
+    window.location.href = "Cart.html";
+  }
 });
 
 // Load 25+ products automatically on start
