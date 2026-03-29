@@ -4,7 +4,7 @@ const cartContainer = document.getElementById("cart-list");
 const totalPriceElement = document.getElementById("total-price");
 
 // 1. Load Data
-const cartKey = currentUser ? `cart_${currentUser.id}` : "cart_guest";
+const cartKey = `cart_${currentUser.id}`;
 let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
 
 // 2. Render Function
