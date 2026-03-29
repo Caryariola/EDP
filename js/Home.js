@@ -6,7 +6,6 @@ const displayUsername = document.getElementById("displayUsername");
 const displayEmail = document.getElementById("displayEmail");
 const logbutton = document.getElementById("logbutton");
 const cartbutton = document.getElementById("cart-btn");
-const checkoutButton = document.getElementById("check-out");
 
 
 const cartKey = currentUser ? `cart_${currentUser.username}` : null;
