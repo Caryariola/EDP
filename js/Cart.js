@@ -139,7 +139,7 @@ if (logbtn) {
             window.location.href = "../auth/Login.html";
         } else {
             logout(); 
-            window.location.href = "../auth/Login.html";
+            window.location.href = "Home.html";
         }
     });
 }
