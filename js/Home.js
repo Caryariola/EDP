@@ -71,7 +71,7 @@ async function getTitle() {
   const minPrice = minPriceInput.value || 1; 
   const maxPrice = maxPriceInput.value || 9999; 
 
-  let url = `https://api.escuelajs.co/api/v1/products`;
+  let url = `https://api.escuelajs.co/api/v1/products?offset=0&limit=30`;
 
   if (categoryId) url += `?categoryId=${categoryId}`;
   if (minPrice) url += `${url.includes('?') ? '&' : '?'}price_min=${minPrice}`;
