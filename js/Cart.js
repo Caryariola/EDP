@@ -5,8 +5,6 @@ const currentUser = getCurrentUser();
 const cartContainer = document.getElementById("cart-list");
 const totalPriceElement = document.getElementById("total-price");
 const clearCartBtn = document.getElementById("clear-cart-btn");
-
-// 1. Define UI elements globally so they are reachable
 const displayUsername = document.getElementById("displayUsername");
 const logname = document.getElementById("logbutton");
 const logbtn = document.getElementById("log-btn");
@@ -39,7 +37,7 @@ function initCart() {
     if (cart.length === 0) {
       cartContainer.innerHTML = `<p class="text-center py-20 text-gray-500">Your cart is empty.</p>`;
       if (totalPriceElement) totalPriceElement.textContent = "$0.00";
-      updateBadge(); // Keep badge in sync
+      updateBadge(); 
       return;
     }
 
@@ -53,12 +51,10 @@ function initCart() {
     updateBadge();
   }
 
-  // --- Actions ---
   window.changeQty = (id, amount) => {
     const item = cart.find((i) => i.id === id);
     if (item) {
       item.quantity += amount;
-      // If quantity is 0 or less, call the removeItem function
       if (item.quantity <= 0) {
         window.removeItem(id);
       } else {
@@ -74,7 +70,7 @@ function initCart() {
 
   function saveAndRefresh() {
     localStorage.setItem(cartKey, JSON.stringify(cart));
-    renderCart(); // This now calls updateBadge() inside it
+    renderCart(); 
   }
 
   if (clearCartBtn) {
@@ -87,56 +83,47 @@ function initCart() {
   }
 
   async function handleCheckout() {
-    // 1. Get user data (Already have currentUser from your top imports)
     if (cart.length === 0) return alert("Cart is empty!");
 
-    // 2. Combine into 1 nested object literal (The Payload)
     const orderPayload = {
       user: {
         username: currentUser.username,
-        email: currentUser.email, // Ensure your auth.js returns the email
+        email: currentUser.email, 
       },
-      cart: [...cart], // Copy of current cart items
+      cart: [...cart], 
       total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
       date: new Date().toISOString(),
     };
 
-    // 3. Show Loading State
     const originalText = checkoutBtn.textContent;
     checkoutBtn.disabled = true;
     checkoutBtn.textContent = "Processing Order...";
 
-    // 4. Use setTimeout to simulate request
     console.log("Sending Payload to 'Server':", orderPayload);
 
     setTimeout(() => {
-      // 5. Simulate Success/Fail (90% success rate)
       const isSuccess = Math.random() > 0.1;
 
       if (isSuccess) {
-        // 6. Save to localStorage (as 'orders_history')
         const checkoutkey = `orders_history_${currentUser.username}`;
         const orders = JSON.parse(localStorage.getItem(checkoutkey)) || [];
         orders.push(orderPayload);
         localStorage.setItem(checkoutkey, JSON.stringify(orders));
 
-        // 7. Clear Cart
         cart = [];
         localStorage.setItem(
           `cart_${currentUser.username}`,
           JSON.stringify(cart),
         );
 
-        // 8. Show Success Message
         alert("Order Successful! Thank you for your purchase.");
         window.location.href = "Home.html";
       } else {
-        // 9. Show Fail Message
         alert("Payment failed. Please check your card and try again.");
         checkoutBtn.disabled = false;
         checkoutBtn.textContent = originalText;
       }
-    }, 2000); // 2 second fake delay
+    }, 4000); 
   }
 
   if (checkoutBtn) {

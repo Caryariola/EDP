@@ -1,6 +1,4 @@
 export function ProductCard(product) {
-    // 1. IMPROVED IMAGE CLEANUP
-    // We use a fallback image in case the URL is empty or the API returns a broken link
     let imageUrl = product.images[0] ? product.images[0].replace(/[\[\]"]/g, "") : "";
     const fallbackImage = "https://placehold.co/400x400?text=No+Image+Available";
 
