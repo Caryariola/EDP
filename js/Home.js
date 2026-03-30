@@ -73,7 +73,7 @@ async function getTitle() {
 
   let url = `https://api.escuelajs.co/api/v1/products?offset=0&limit=30`;
 
-  if (categoryId) url += `?categoryId=${categoryId}`;
+  if (categoryId) url += `&categoryId=${categoryId}`;
   if (minPrice) url += `${url.includes('?') ? '&' : '?'}price_min=${minPrice}`;
   if (maxPrice) url += `${url.includes('?') ? '&' : '?'}price_max=${maxPrice}`;
 
